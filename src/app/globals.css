@@ -1,26 +1,156 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --forest-950: #0f241b;
+  --forest-900: #143528;
+  --forest-800: #1b4433;
+  --forest-700: #22553f;
+  --forest-600: #2d6b50;
+  --leaf: #3e8e63;
+  --leaf-soft: #e4efe8;
+  --leaf-faint: #f1f6f2;
+  --charcoal: #1e2321;
+  --ink: #26302b;
+  --muted: #5d6a63;
+  --subtle: #8a958f;
+  --line: #e2e4dc;
+  --line-strong: #cfd3c8;
+  --paper: #f7f6f1;
+  --surface: #ffffff;
+  --danger: #a33a2c;
+  --danger-soft: #f8e9e6;
+  --warn: #8a5a12;
+  --warn-soft: #fbf1df;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-forest-950: var(--forest-950);
+  --color-forest-900: var(--forest-900);
+  --color-forest-800: var(--forest-800);
+  --color-forest-700: var(--forest-700);
+  --color-forest-600: var(--forest-600);
+  --color-leaf: var(--leaf);
+  --color-leaf-soft: var(--leaf-soft);
+  --color-leaf-faint: var(--leaf-faint);
+  --color-charcoal: var(--charcoal);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-serif), ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--leaf-soft);
+}
+
+:focus-visible {
+  outline: 2px solid var(--leaf);
+  outline-offset: 2px;
+}
+
+/* Answer typography */
+.prose-zw {
+  font-size: 0.975rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.prose-zw > * + * {
+  margin-top: 0.85em;
+}
+.prose-zw h1,
+.prose-zw h2,
+.prose-zw h3 {
+  font-weight: 600;
+  color: var(--charcoal);
+  line-height: 1.35;
+  margin-top: 1.4em;
+}
+.prose-zw h1 { font-size: 1.2rem; }
+.prose-zw h2 { font-size: 1.08rem; }
+.prose-zw h3 { font-size: 1rem; }
+.prose-zw ul,
+.prose-zw ol {
+  padding-left: 1.3em;
+}
+.prose-zw ul { list-style: disc; }
+.prose-zw ol { list-style: decimal; }
+.prose-zw li + li { margin-top: 0.3em; }
+.prose-zw li::marker { color: var(--subtle); }
+.prose-zw strong { font-weight: 600; color: var(--charcoal); }
+.prose-zw a { color: var(--forest-700); text-decoration: underline; text-underline-offset: 2px; text-decoration-color: var(--line-strong); }
+.prose-zw code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--leaf-faint);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.05em 0.3em;
+}
+.prose-zw pre {
+  background: var(--charcoal);
+  color: #e8ece9;
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+.prose-zw pre code { background: none; border: 0; padding: 0; color: inherit; }
+.prose-zw blockquote {
+  border-left: 3px solid var(--leaf-soft);
+  padding-left: 0.9em;
+  color: var(--muted);
+}
+.prose-zw table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+}
+.prose-zw th,
+.prose-zw td {
+  border: 1px solid var(--line);
+  padding: 0.45em 0.7em;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-zw th { background: var(--leaf-faint); font-weight: 600; }
+
+.streaming-caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: var(--leaf);
+  border-radius: 1px;
+  animation: zw-blink 1s steps(2, start) infinite;
+}
+@keyframes zw-blink {
+  to { visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .streaming-caret::after { animation: none; }
 }
